@@ -61,6 +61,11 @@ Header-only C++17 library provides static reflection for enums, work with any en
 
 ## [Examples](example/example.cpp)
 
+```cpp
+// For example color enum.
+enum class Color { RED = 2, BLUE = 4, GREEN = 8 };
+```
+
 * Enum value to string
 
   ```cpp
@@ -77,8 +82,6 @@ Header-only C++17 library provides static reflection for enums, work with any en
   if (color.has_value()) {
     // color.value() -> Color::GREEN
   }
-
-  auto color_or_default = magic_enum::enum_cast<Color>(value).value_or(Color::NONE);
   ```
 
 * Integer to enum value
@@ -87,18 +90,16 @@ Header-only C++17 library provides static reflection for enums, work with any en
   int color_integer = 2;
   auto color = magic_enum::enum_cast<Color>(color_integer);
   if (color.has_value()) {
-    // color.value() -> Color::BLUE
+    // color.value() -> Color::RED
   }
-
-  auto color_or_default = magic_enum::enum_cast<Color>(value).value_or(Color::NONE);
   ```
 
 * Indexed access to enum value
 
   ```cpp
-  std::size_t i = 0;
+  std::size_t i = 1;
   Color color = magic_enum::enum_value<Color>(i);
-  // color -> Color::RED
+  // color -> Color::BLUE
   ```
 
 * Enum value sequence
@@ -121,7 +122,7 @@ Header-only C++17 library provides static reflection for enums, work with any en
   ```cpp
   Color color = Color::RED;
   auto color_integer = magic_enum::enum_integer(color);
-  // color -> 1
+  // color -> 2
   ```
 
 * Enum names sequence
@@ -154,6 +155,7 @@ Header-only C++17 library provides static reflection for enums, work with any en
 * Enum switch runtime value as constexpr constant
   ```cpp
   Color color = Color::RED;
+  
   magic_enum::enum_switch([] (auto val) {
     constexpr Color c_color = val;
     // ...
